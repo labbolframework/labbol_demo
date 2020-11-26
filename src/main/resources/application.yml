@@ -1,0 +1,60 @@
+server:
+ port: 8080
+spring:
+ redis:
+  host: localhost
+  port: 6379
+ servlet:
+  multipart:
+   max-file-size: 200MB
+   max-request-size: 200MB
+ mvc:
+   view:
+     prefix: /WEB-INF/jsp/
+ application:
+  name: emc_index
+ datasource:
+   name: emc_index
+   url: jdbc:mysql://192.168.1.24:3306/labbol_demo
+   username: labbol_demo
+   password: labbol_demo
+   driver-class-name: com.mysql.jdbc.Driver
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    lease-renewal-interval-in-seconds: 300
+    health-check-url-path: /actuator/health
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+#开启logging myabtis语句打印
+logging:
+ level:
+  main.blog.mapper: trace
+  org.yelong: trace
+mybatis:
+ configuration:
+  log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+labbol:
+ cache: true
+ #登录验证模式
+ loginMode: test
+ plugin:
+  support:
+   security: true
+   logRecord: true
+   rights: true
+   xss: true
+ cocoon: 
+  #模板的controller：dict、icon、moduleService
+  codeController: true
+  #项目路径配置
+  projectPathSetListener: true
+  #静态资源路径
+  staticResourcesRootPath: http://192.168.1.24:12511/
+  #本项目路径
+  #thisProjectRootPath: /cetc/v1.0/index
+  #静态资源路径的模块服务名称。如果没有设置则为spring.application.name
+  #staticResourcesServiceName: emc_index
+  #本项目的模块服务名称。如果没有设置则为spring.application.name
+  #thisProjectServiceName: emc_index

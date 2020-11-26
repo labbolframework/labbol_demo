@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>JSTL 1.1 functions library</description>
+	<display-name>JSTL functions sys</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>fns</short-name>
+	<uri>http://java.sun.com/jsp/jstl/functionss</uri>
+
+	<function>
+		<description>文件大小转义</description>
+		<name>byteCountToDisplaySize</name>
+		<function-class>org.yelong.commons.io.FileUtils</function-class>
+		<function-signature>java.lang.String byteCountToDisplaySize(long,int)</function-signature>
+		<example>${fns:byteCountToDisplaySize(fileSize,decimalDigits)}</example>
+	</function>
+
+	<function>
+		<description>获取字典文本</description>
+		<name>getDictText</name>
+		<function-class>com.labbol.core.platform.dict.utils.DictUtils</function-class>
+		<function-signature>java.lang.String getDictText(java.lang.String,java.lang.String)</function-signature>
+		<example>${fns:getDictText(dictType,value)}</example>
+	</function>
+</taglib>
