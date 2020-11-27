@@ -1,8 +1,12 @@
 package test.model;
 
+import java.text.ParseException;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.Test;
+import org.yelong.commons.util.Dates;
 import org.yelong.core.jdbc.BaseDataBaseOperation;
 import org.yelong.core.jdbc.sql.condition.support.Condition;
 import org.yelong.core.model.service.SqlModelServiceAdapter;
@@ -72,6 +76,28 @@ public class ModelServiceDemo {
 	public void findById() {
 		User user = modelService.findById(User.class, "12345678912345789");
 		System.out.println(user.getUsername());
+	}
+
+	@Test
+	public void findBySQL() {
+		List<User> users = modelService.findBySQL(User.class, "select * from co_user where username = ?",
+				ArrayUtils.toArray("yelong"));
+		users.stream().map(User::getUsername).forEach(System.out::println);
+	}
+
+	@Test
+	public void findFirstBySQL() {
+		User user = modelService.findFirstBySQL(User.class, "select * from co_user where username = ?",
+				ArrayUtils.toArray("yelong"));
+		System.out.println(user.getUsername());
+	}
+
+	@Test
+	public void findPageBySqlModel() throws ParseException {
+		User sqlModel = new User();
+		sqlModel.addCondition("createTime", ">", DateUtils.parseDate("2020-01-01", Dates.YYYY_MM_DD_BAR));
+		List<User> users = modelService.findPageBySqlModel(User.class, sqlModel, 1, 5);
+		users.stream().map(User::getUsername).forEach(System.out::println);
 	}
 
 	@Test
